@@ -6,7 +6,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ResultCode {
-    DOMAIN_BEHAVIOR_SUCCESS("EXAMPLE", "예시 코드입니다.");
+    // Auth
+    AUTH_SIGNUP_SUCCESS("A001", "회원가입에 성공하였습니다.");
 
     private final String code;
     private final String message;
