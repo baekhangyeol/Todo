@@ -1,5 +1,6 @@
 package com.project.todo.domain.auth.controller;
 
+import com.project.todo.domain.auth.dto.request.LogoutRequest;
 import com.project.todo.domain.auth.dto.response.GetTokenResponse;
 import com.project.todo.domain.auth.service.AuthService;
 import com.project.todo.domain.member.dto.request.MemberSignInRequest;
@@ -31,6 +32,13 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<ResultResponse> login(@Validated @RequestBody MemberSignInRequest memberSignInRequest) {
         GetTokenResponse response = authService.signIn(memberSignInRequest);
-        return ResponseEntity.ok(ResultResponse.of(ResultCode.AUTH_SIGNIN_SUCCESS, response));
+        return ResponseEntity.ok(ResultResponse.of(ResultCode.AUTH_LOGIN_SUCCESS, response));
+    }
+
+    @PostMapping("logout")
+    public ResponseEntity<ResultResponse> logout(@Validated @RequestBody LogoutRequest request) {
+        authService.logout(request);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+            .body(ResultResponse.of(ResultCode.AUTH_LOGIN_SUCCESS));
     }
 }

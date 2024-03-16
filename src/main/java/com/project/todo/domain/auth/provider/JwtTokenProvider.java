@@ -111,4 +111,15 @@ public class JwtTokenProvider {
             return e.getClaims();
         }
     }
+
+    public String getEmailInAuthentication(String accessToken) {
+        Authentication authentication = this.getAuthentication(accessToken);
+        return authentication.getName();
+    }
+
+    public Long getExpiration(String accessToken) {
+        Date expiration = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(accessToken).getBody()
+            .getExpiration();
+        return (expiration.getTime() - System.currentTimeMillis()) / 1000;
+    }
 }
