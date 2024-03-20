@@ -9,6 +9,7 @@ import com.project.todo.global.result.ResultCode;
 import com.project.todo.global.result.ResultResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ public class TodoController {
     @PostMapping
     public ResponseEntity<ResultResponse> createTodo(@Validated @RequestBody CreateTodoRequest request, @LoginUser Member member) {
         CreateTodoResponse response = todoService.createTodo(request, member);
-        return ResponseEntity.ok(ResultResponse.of(ResultCode.TODO_CREATE_SUCCESS, response));
+        return ResponseEntity.status(HttpStatus.CREATED)
+            .body(ResultResponse.of(ResultCode.TODO_CREATE_SUCCESS, response));
     }
 }
