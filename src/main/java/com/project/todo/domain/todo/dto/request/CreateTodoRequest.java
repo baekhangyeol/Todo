@@ -16,14 +16,13 @@ import lombok.NoArgsConstructor;
 public class CreateTodoRequest {
 
     private String title;
-    private boolean isChecked;
     private LocalDateTime dueDate;
 
     public Todo toEntity(Member member) {
         return Todo.builder()
                 .member(member)
                 .title(title)
-                .isChecked(isChecked)
+                .isChecked(false)
                 .dueDate(dueDate)
                 .build();
     }
