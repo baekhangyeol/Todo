@@ -16,6 +16,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Getter
@@ -29,6 +30,7 @@ public class Todo extends BaseEntity {
     private String title;
     @ColumnDefault("false")
     private boolean isChecked;
+    @DateTimeFormat(pattern = "yyyy-MM-dd-HH-mm-ss")
     private LocalDateTime dueDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
