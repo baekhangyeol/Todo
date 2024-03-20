@@ -2,6 +2,8 @@ package com.project.todo.global.config;
 
 import com.project.todo.domain.auth.controller.JwtAuthenticationFilter;
 import com.project.todo.domain.auth.provider.JwtTokenProvider;
+import com.project.todo.domain.auth.repository.AuthRepository;
+import com.project.todo.domain.member.domain.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
