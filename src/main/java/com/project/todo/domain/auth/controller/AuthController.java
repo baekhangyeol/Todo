@@ -7,6 +7,7 @@ import com.project.todo.domain.member.dto.request.MemberSignInRequest;
 import com.project.todo.domain.member.dto.request.MemberSignUpRequest;
 import com.project.todo.global.result.ResultCode;
 import com.project.todo.global.result.ResultResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name= "Auth", description = "인증 API")
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor(access = lombok.AccessLevel.PROTECTED)
