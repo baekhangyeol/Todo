@@ -12,7 +12,8 @@ public enum ResultCode {
     AUTH_LOGOUT_SUCCESS("A003", "로그아웃에 성공하였습니다."),
 
     // Todo
-    TODO_CREATE_SUCCESS("T001", "Todo를 생성하였습니다.");
+    TODO_CREATE_SUCCESS("T001", "Todo를 생성하였습니다."),
+    TODO_UPDATE_SUCCESS("T002", "Todo를 수정하였습니다.");
 
     private final String code;
     private final String message;

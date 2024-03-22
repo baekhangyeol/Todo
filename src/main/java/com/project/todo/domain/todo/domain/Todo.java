@@ -1,6 +1,7 @@
 package com.project.todo.domain.todo.domain;
 
 import com.project.todo.domain.member.domain.Member;
+import com.project.todo.domain.todo.dto.request.UpdateTodoRequest;
 import com.project.todo.global.common.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,4 +37,9 @@ public class Todo extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
+
+    public void update(UpdateTodoRequest request) {
+        this.title = request.getTitle();
+        this.dueDate = request.getDueDate();
+    }
 }

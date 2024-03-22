@@ -3,7 +3,9 @@ package com.project.todo.domain.todo.service;
 import com.project.todo.domain.member.domain.Member;
 import com.project.todo.domain.todo.domain.Todo;
 import com.project.todo.domain.todo.dto.request.CreateTodoRequest;
+import com.project.todo.domain.todo.dto.request.UpdateTodoRequest;
 import com.project.todo.domain.todo.dto.response.CreateTodoResponse;
+import com.project.todo.domain.todo.dto.response.UpdateTodoResponse;
 import com.project.todo.domain.todo.repository.TodoRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +23,12 @@ public class TodoService {
         Todo entity = request.toEntity(member);
         Todo todo = todoRepository.save(entity);
         return CreateTodoResponse.from(todo.getId());
+    }
+
+    @Transactional
+    public UpdateTodoResponse updateTodo(Long id, UpdateTodoRequest request, Member member) {
+        Todo todo = todoRepository.findById(id).orElseThrow();
+        todo.update(request);
+        return UpdateTodoResponse.from(todo.getId());
     }
 }
