@@ -2,6 +2,7 @@ package com.project.todo.global.error;
 
 import com.project.todo.global.error.exception.BusinessException;
 import com.project.todo.global.error.exception.EmptyResultDataException;
+import com.project.todo.global.error.exception.UnauthorizedAccessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(EmptyResultDataException.class)
     protected ResponseEntity<ErrorResponse> handleEmptyResultDataException(EmptyResultDataException e) {
+        final ErrorCode errorCode = e.getErrorCode();
+        final ErrorResponse response = makeErrorResponse(errorCode);
+        log.warn(e.getMessage());
+        return new ResponseEntity<>(response, errorCode.getStatus());
+    }
+
+    @ExceptionHandler(UnauthorizedAccessException.class)
+    protected ResponseEntity<ErrorResponse> handleUnauthorizedAccessException(UnauthorizedAccessException e) {
         final ErrorCode errorCode = e.getErrorCode();
         final ErrorResponse response = makeErrorResponse(errorCode);
         log.warn(e.getMessage());
