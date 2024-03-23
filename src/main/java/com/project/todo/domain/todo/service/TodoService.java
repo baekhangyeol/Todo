@@ -31,7 +31,8 @@ public class TodoService {
     @Transactional
     public UpdateTodoResponse updateTodo(Long id, UpdateTodoRequest request, Member member) {
         Todo todo = todoRepository.findById(id).orElseThrow(() -> new EmptyResultDataException(ErrorCode.TODO_NOT_FOUND));
-        if(todo.getMember() != member) throw new UnauthorizedAccessException(ErrorCode.TODO_NOT_ACCESS);
+        if(todo.getMember().equals(member))
+            throw new UnauthorizedAccessException(ErrorCode.TODO_NOT_ACCESS);
         todo.update(request);
         return UpdateTodoResponse.from(todo.getId());
     }
