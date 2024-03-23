@@ -4,17 +4,21 @@ import com.project.todo.domain.member.domain.Member;
 import com.project.todo.domain.todo.dto.request.CreateTodoRequest;
 import com.project.todo.domain.todo.dto.request.UpdateTodoRequest;
 import com.project.todo.domain.todo.dto.response.CreateTodoResponse;
+import com.project.todo.domain.todo.dto.response.GetTodoListResponse;
 import com.project.todo.domain.todo.dto.response.UpdateTodoResponse;
 import com.project.todo.domain.todo.service.TodoService;
 import com.project.todo.global.common.annotation.LoginUser.LoginUser;
 import com.project.todo.global.result.ResultCode;
 import com.project.todo.global.result.ResultResponse;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -47,5 +51,12 @@ public class TodoController {
         todoService.deleteTodo(todoId, member);
         return ResponseEntity.status(HttpStatus.NO_CONTENT)
             .body(ResultResponse.of(ResultCode.TODO_DELETE_SUCCESS));
+    }
+
+    @GetMapping("/{date}")
+    public ResponseEntity<ResultResponse> getListTodo(@PathVariable LocalDateTime date, @LoginUser Member member) {
+        List<GetTodoListResponse> response = todoService.getListTodo(date, member);
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(ResultResponse.of(ResultCode.TODO_GET_SUCCESS, response));
     }
 }
