@@ -2,6 +2,8 @@ package com.project.todo.global.config;
 
 import com.project.todo.domain.auth.controller.JwtAuthenticationFilter;
 import com.project.todo.domain.auth.provider.JwtTokenProvider;
+import com.project.todo.domain.auth.repository.AuthRepository;
+import com.project.todo.domain.member.domain.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,7 +37,7 @@ public class SecurityConfig {
             .authorizeHttpRequests((authorizeRequests) ->
                 authorizeRequests
                     .requestMatchers("/api/v1/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()
-                    .requestMatchers("/api/v1/**").hasRole("USER")
+                    .requestMatchers("/api/v1/**").hasAuthority("USER")
                     .anyRequest().authenticated()
             )
             .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),

@@ -12,7 +12,11 @@ public enum ErrorCode {
     INPUT_INVALID_VALUE(HttpStatus.BAD_REQUEST, "G002", "잘못된 입력"),
 
     // Member
-    EMAIL_DUPLICATE_ERROR(HttpStatus.BAD_REQUEST, "M001", "이미 사용중인 이메일입니다.");
+    EMAIL_DUPLICATE_ERROR(HttpStatus.BAD_REQUEST, "M001", "이미 사용중인 이메일입니다."),
+
+    // Todo
+    TODO_NOT_FOUND(HttpStatus.NOT_FOUND, "T001", "Todo을 찾을 수 없습니다."),
+    TODO_NOT_ACCESS(HttpStatus.FORBIDDEN, "T002", "Todo에 접근할 수 없습니다.");
 
     private final HttpStatus status;
     private final String errorCode;
