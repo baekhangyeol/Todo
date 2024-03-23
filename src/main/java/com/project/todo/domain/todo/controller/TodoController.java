@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -39,5 +40,12 @@ public class TodoController {
         UpdateTodoResponse response = todoService.updateTodo(todoId, request, member);
         return ResponseEntity.status(HttpStatus.OK)
             .body(ResultResponse.of(ResultCode.TODO_UPDATE_SUCCESS, response));
+    }
+
+    @DeleteMapping("/{todoId}")
+    public ResponseEntity<ResultResponse> deleteTodo(@PathVariable Long todoId, @LoginUser Member member) {
+        todoService.deleteTodo(todoId, member);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+            .body(ResultResponse.of(ResultCode.TODO_DELETE_SUCCESS));
     }
 }
