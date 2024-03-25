@@ -13,6 +13,7 @@ public enum ErrorCode {
 
     // Member
     EMAIL_DUPLICATE_ERROR(HttpStatus.BAD_REQUEST, "M001", "이미 사용중인 이메일입니다."),
+    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "M002", "사용자를 찾을 수 없습니다."),
 
     // Todo
     TODO_NOT_FOUND(HttpStatus.NOT_FOUND, "T001", "Todo을 찾을 수 없습니다."),
