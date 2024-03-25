@@ -7,9 +7,11 @@ import com.project.todo.domain.member.repository.MemberRepository;
 import com.project.todo.global.error.ErrorCode;
 import com.project.todo.global.error.exception.NotFoundException;
 import com.project.todo.global.error.exception.UnauthorizedAccessException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.Optional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,5 +39,12 @@ public class FollowService {
             Follow newFollow = new Follow(follower.getId(), followMember.getId());
             followRepository.save(newFollow);
         }
+    }
+
+    @Transactional
+    public void deleteFollow(Long following, Member follower) {
+        Follow follow = followRepository.findByFollowerIdAndFollowingId(follower.getId(), following)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.MEMBER_NOT_FOUND));
+        follow.delete();
     }
 }

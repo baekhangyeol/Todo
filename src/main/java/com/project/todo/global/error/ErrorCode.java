@@ -17,7 +17,10 @@ public enum ErrorCode {
 
     // Todo
     TODO_NOT_FOUND(HttpStatus.NOT_FOUND, "T001", "Todo을 찾을 수 없습니다."),
-    TODO_NOT_ACCESS(HttpStatus.FORBIDDEN, "T002", "Todo에 접근할 수 없습니다.");
+    TODO_NOT_ACCESS(HttpStatus.FORBIDDEN, "T002", "Todo에 접근할 수 없습니다."),
+
+    // Follow
+    FOLLOW_SELF_ERROR(HttpStatus.BAD_REQUEST, "F001", "자신을 팔로우할 수 없습니다.");
 
     private final HttpStatus status;
     private final String errorCode;
