@@ -16,11 +16,14 @@ public class MemberSignUpRequest {
     private String email;
     @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    private String nickname;
 
     public Member toEntity(String encodedPassword) {
         return Member.builder()
                 .email(email)
                 .password(encodedPassword)
+                .nickname(nickname)
                 .role(Role.USER)
                 .build();
     }
