@@ -8,6 +8,7 @@ import com.project.todo.global.error.ErrorCode;
 import com.project.todo.global.error.exception.NotFoundException;
 import com.project.todo.global.error.exception.UnauthorizedAccessException;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.Optional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -46,5 +47,10 @@ public class FollowService {
         Follow follow = followRepository.findByFollowerIdAndFollowingId(follower.getId(), following)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.MEMBER_NOT_FOUND));
         follow.delete();
+    }
+
+    @Transactional
+    public List<Long> findFollowers(Long memberId) {
+        return followRepository.findFollowerIdsByMemberId(memberId);
     }
 }
