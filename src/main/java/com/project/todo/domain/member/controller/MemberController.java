@@ -1,6 +1,5 @@
 package com.project.todo.domain.member.controller;
 
-import com.project.todo.domain.follow.domain.Follow;
 import com.project.todo.domain.follow.service.FollowService;
 import com.project.todo.global.result.ResultCode;
 import com.project.todo.global.result.ResultResponse;
@@ -20,16 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
     private final FollowService followService;
 
-    @GetMapping("/{memberId}/followers")
-    public ResponseEntity<ResultResponse> getFollowers(@PathVariable Long memberId) {
-        List<Long> followers = followService.findFollowers(memberId);
+    @GetMapping("/{id}/followers")
+    public ResponseEntity<ResultResponse> getFollowers(@PathVariable Long id) {
+        List<String> followers = followService.findFollowers(id);
         return ResponseEntity.status(HttpStatus.OK)
             .body(ResultResponse.of(ResultCode.FOLLOWER_GET_SUCCESS, followers));
     }
 
-    @GetMapping("/{memberId}/followings")
-    public ResponseEntity<ResultResponse> getFollowings(@PathVariable Long memberId) {
-        List<Long> followings = followService.findFollowings(memberId);
+    @GetMapping("/{id}/followings")
+    public ResponseEntity<ResultResponse> getFollowings(@PathVariable Long id) {
+        List<String> followings = followService.findFollowings(id);
         return ResponseEntity.status(HttpStatus.OK)
             .body(ResultResponse.of(ResultCode.FOLLOWING_GET_SUCCESS, followings));
     }
