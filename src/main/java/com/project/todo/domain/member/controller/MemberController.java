@@ -26,4 +26,11 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.OK)
             .body(ResultResponse.of(ResultCode.FOLLOWER_GET_SUCCESS, followers));
     }
+
+    @GetMapping("/{memberId}/followings")
+    public ResponseEntity<ResultResponse> getFollowings(@PathVariable Long memberId) {
+        List<Long> followings = followService.findFollowings(memberId);
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(ResultResponse.of(ResultCode.FOLLOWING_GET_SUCCESS, followings));
+    }
 }

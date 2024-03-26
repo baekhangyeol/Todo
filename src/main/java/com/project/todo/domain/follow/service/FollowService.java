@@ -53,4 +53,9 @@ public class FollowService {
     public List<Long> findFollowers(Long memberId) {
         return followRepository.findFollowerIdsByMemberId(memberId);
     }
+
+    @Transactional
+    public List<Long> findFollowings(Long memberId) {
+        return followRepository.findFollowingIdsByMemberId(memberId);
+    }
 }
